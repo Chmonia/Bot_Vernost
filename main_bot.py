@@ -6,7 +6,7 @@ from aiogram.dispatcher.filters import Command, ContentTypesFilter
 from aiogram.types import ContentType
 from dotenv import load_dotenv
 from core.filters.iscintact import IsTrueContact
-from core.handlers.basic import get_start, get_sticker, call, reset
+from core.handlers.basic import get_start, get_sticker, call, reset, ret, select_news
 from core.handlers.callback import select_pet, select_pet2, select_pet3, output_pets, all_pets
 from core.handlers.contact import get_true_contact, get_fake_contact
 from core.settings import settings
@@ -40,7 +40,10 @@ async def start():
     dp.pre_checkout_query.register(pre_checkout_query)
     dp.message.register(successful_payment, ContentTypesFilter(content_types=[ContentType.SUCCESSFUL_PAYMENT]))
     dp.message.register(all_pets, text="Найденные питомцы 🌸")
+    dp.message.register(select_news, text="Показать следующую новость:")
+    dp.message.register(select_news, text="Показать новости не выходя из телеграмма 🐶")
     dp.message.register(all_pets, text="Показать следующего питомца:")
+    dp.message.register(ret, text="Выйти из показа питомцев")
     dp.message.register(output_pets, text="Следующий питомец 🐶")
     dp.message.register(output_pets, text="Показать питомцев:")
     dp.message.register(call, text="Связаться с нами и забарть питомца 📞")
